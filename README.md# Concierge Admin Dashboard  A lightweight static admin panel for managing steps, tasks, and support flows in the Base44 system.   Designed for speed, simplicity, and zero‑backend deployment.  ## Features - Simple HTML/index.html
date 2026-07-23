@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ops Dashboard Template</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">OP</div>
+        <div class="brand-text">
+          <div class="brand-title">Ops Template</div>
+          <div class="brand-sub">GitHub-ready dashboard layout</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Views</div>
+        <div class="nav-list">
+          <div class="nav-item primary">
+            <div class="nav-item-label">
+              <div class="nav-dot"></div>
+              <span>Active Ops Dashboard</span>
+            </div>
+            <span class="nav-pill">Live</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-item-label">
+              <div class="nav-dot"></div>
+              <span>Staged Pipelines</span>
+            </div>
+            <span class="nav-pill">Template</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-item-label">
+              <div class="nav-dot"></div>
+              <span>System Logs</span>
+            </div>
+            <span class="nav-pill">Read-only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="status-row">
+          <span>Template status</span>
+          <span class="status-pill">
+            <span class="status-dot"></span>
+            Stable
+          </span>
+        </div>
+        <div class="hint">
+          One copy, one paste.  
+          This file is designed to drop straight into GitHub as-is.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="main-header">
+        <div class="main-title-block">
+          <div class="main-title">Ops dashboard template</div>
+          <div class="main-subtitle">
+            Static layout for GitHub — wiring and data can be added later.
+          </div>
+        </div>
+        <div class="main-controls">
+          <span class="tag accent">
+            <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Sync GitHub template with live config</div>
+                  <div class="list-meta">Status: Pending · Owner: Systems</div>
+                </div>
+                <span class="pill">Pending</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Review staged “easy” pipeline</div>
+                  <div class="list-meta">Status: Ready · Owner: Ops</div>
+                </div>
+                <span class="pill success">Ready</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title-block">
+              <div class="panel-title">Support console</div>
+              <div class="panel-subtitle">
+                Notes, flags, and quick context for this template.
+              </div>
+            </div>
+            <div class="panel-tags">
+              <span class="tag">Channel: Internal</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="list">
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Template is static-only</div>
+                  <div class="list-meta">
+                    No backend, no JS wiring yet — safe to paste into GitHub.
+                  </div>
+                </div>
+                <span class="pill success">Safe</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Closing tags verified</div>
+                  <div class="list-meta">
+                    File ends with &lt;/body&gt; and &lt;/html&gt; — complete document.
+                  </div>
+                </div>
+                <span class="pill success">Complete</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Future wiring</div>
+                  <div class="list-meta">
+                    Buttons can be wired later without changing layout.
+                  </div>
+                </div>
+                <span class="pill">Later</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+        <section class="panel">
+        <div class="panel-header">
+          <div class="panel-title-block">
+            <div class="panel-title">Steps manager</div>
+            <div class="panel-subtitle">
+              Visual separation between active, staged-easy, and staged-hard pipelines.
+            </div>
+          </div>
+          <div class="panel-tags">
+            <span class="tag accent">Multi-pipeline view</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="steps-grid">
+            <div>
+              <div class="steps-column-title">Active pipeline</div>
+              <div class="steps-list">
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Step 1 · Intake</div>
+                    <div class="step-meta">Collect baseline info and constraints.</div>
+                  </div>
+                  <span class="pill success">Live</span>
+                </div>
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Step 2 · Template sync</div>
+                    <div class="step-meta">Align GitHub layout with ops reality.</div>
+                  </div>
+                  <span class="pill warning">In progress</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="steps-column-title">Staged pipelines</div>
+              <div class="steps-list">
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Easy pipeline</div>
+                    <div class="step-meta">Low-friction onboarding path.</div>
+                  </div>
+                  <span class="pill">Staged</span>
+                </div>
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Hard pipeline</div>
+                    <div class="step-meta">Complex integrations and edge cases.</div>
+                  </div>
+                  <span class="pill danger">Heavy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panel-header">
+          <div class="panel-title-block">
+            <div class="panel-title">System logs</div>
+            <div class="panel-subtitle">
+              Read-only log stream for template-related events.
+            </div>
+          </div>
+          <div class="panel-tags">
+            <span class="tag">Mode: Read-only</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="logs-list">
+            <div class="log-item">
+              <div class="log-text">
+                [INFO] Template v1.0 exported for GitHub use.
+              </div>
+              <span class="log-tag info">Info</span>
+            </div>
+            <div class="log-item">
+              <div class="log-text">
+                [EVENT] Layout verified: all closing tags present.
+              </div>
+              <span class="log-tag event">Event</span>
+            </div>
+            <div class="log-item">
+              <div class="log-text">
+                [INFO] Static-only mode confirmed — no runtime dependencies.
+              </div>
+              <span class="log-tag info">Info</span>
+            </div>
+            <div class="log-item">
+              <div class="log-text">
+                [ERROR] None detected in current template snapshot.
+              </div>
+              <span class="log-tag error">Error</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
