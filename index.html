@@ -2,39 +2,750 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Concierge Admin Dashboard</title>
+  <title>Ops Dashboard Template</title>
   <style>
-    body {
+    :root {
+      --bg: #050608;
+      --bg-alt: #0b0d10;
+      --panel: #11141a;
+      --panel-alt: #171b23;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+      --border: #1f2933;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0F0F10;
-      color: #FFFFFF;
+      background: radial-gradient(circle at top, #111827 0, #020309 55%);
+      color: var(--text-main);
+      min-height: 100vh;
       display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 24px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1320px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(3, 7, 18, 0.98));
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow:
+        0 32px 80px rgba(15, 23, 42, 0.85),
+        inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      overflow: hidden;
     }
 
     .sidebar {
-      width: 240px;
-      background: #111317;
-      padding: 24px;
-      box-sizing: border-box;
-      border-right: 1px solid #22252B;
+      background: radial-gradient(circle at top left, #020617 0, #020309 55%);
+      border-right: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .sidebar h2 {
-      margin-top: 0;
-      margin-bottom: 24px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 64, 175, 0.35));
+      border: 1px solid rgba(59, 130, 246, 0.55);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
     }
 
-    .sidebar a {
-      display: block;
-      color: #CCCCCC;
-      text-decoration: none;
-      margin-bottom: 12px;
+    .brand-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: radial-gradient(circle at top, #1d4ed8 0, #020617 65%);
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 14px;
+      color: var(--text-main);
     }
 
-    .sidebar a:hover {
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #bfdbfe;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-bottom: 6px;
+      padding: 0 4px;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: default;
+      border: 1px solid transparent;
+    }
+
+    .nav-item.primary {
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.65), rgba(15, 23, 42, 0.95));
+      border-color: rgba(59, 130, 246, 0.8);
+      color: #e5e7eb;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 12px 30px rgba(30, 64, 175, 0.65);
+    }
+
+    .nav-item-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.4);
+    }
+
+    .nav-item.primary .nav-dot {
+      background: #60a5fa;
+    }
+
+    .nav-pill {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #9ca3af;
+    }
+
+    .nav-item.primary .nav-pill {
+      border-color: rgba(191, 219, 254, 0.9);
+      color: #bfdbfe;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+      font-size: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .main {
+      padding: 18px 18px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: radial-gradient(circle at top right, #020617 0, #020309 60%);
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .main-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .main-title {
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .main-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .main-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #9ca3af;
+    }
+
+    .tag.accent {
+      border-color: rgba(59, 130, 246, 0.9);
+      color: #bfdbfe;
+      background: rgba(30, 64, 175, 0.35);
+    }
+
+    .action-btn {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .action-btn.primary {
+      border-color: rgba(59, 130, 246, 0.9);
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(15, 23, 42, 0.95));
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 12px 30px rgba(30, 64, 175, 0.75);
+      color: #e5e7eb;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.1fr;
+      gap: 12px;
+    }
+
+    .panel {
+      background: radial-gradient(circle at top, #020617 0, #020309 60%);
+      border-radius: 12px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.9),
+        inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 10px 10px 9px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .panel-title {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .panel-subtitle {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .panel-tags {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-body {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .list-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .list-title {
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .list-meta {
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .pill {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #9ca3af;
+    }
+
+    .pill.success {
+      border-color: rgba(34, 197, 94, 0.8);
+      color: #bbf7d0;
+    }
+
+    .pill.warning {
+      border-color: rgba(245, 158, 11, 0.8);
+      color: #fed7aa;
+    }
+
+    .pill.danger {
+      border-color: rgba(239, 68, 68, 0.85);
+      color: #fecaca;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      gap: 8px;
+    }
+
+    .steps-column-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .step-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .step-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .step-title {
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .step-meta {
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .logs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 10px;
+      color: #9ca3af;
+    }
+
+    .log-item {
+      padding: 4px 6px;
+      border-radius: 7px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .log-text {
+      max-width: 70%;
+    }
+
+    .log-tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #9ca3af;
+    }
+
+    .log-tag.info {
+      border-color: rgba(59, 130, 246, 0.9);
+      color: #bfdbfe;
+    }
+
+    .log-tag.error {
+      border-color: rgba(239, 68, 68, 0.9);
+      color: #fecaca;
+    }
+
+    .log-tag.event {
+      border-color: rgba(245, 158, 11, 0.9);
+      color: #fed7aa;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">OP</div>
+        <div class="brand-text">
+          <div class="brand-title">Ops Template</div>
+          <div class="brand-sub">GitHub-ready dashboard layout</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="nav-section-title">Views</div>
+        <div class="nav-list">
+          <div class="nav-item primary">
+            <div class="nav-item-label">
+              <div class="nav-dot"></div>
+              <span>Active Ops Dashboard</span>
+            </div>
+            <span class="nav-pill">Live</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-item-label">
+              <div class="nav-dot"></div>
+              <span>Staged Pipelines</span>
+            </div>
+            <span class="nav-pill">Template</span>
+          </div>
+          <div class="nav-item">
+            <div class="nav-item-label">
+              <div class="nav-dot"></div>
+              <span>System Logs</span>
+            </div>
+            <span class="nav-pill">Read-only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="status-row">
+          <span>Template status</span>
+          <span class="status-pill">
+            <span class="status-dot"></span>
+            Stable
+          </span>
+        </div>
+        <div class="hint">
+          One copy, one paste.  
+          This file is designed to drop straight into GitHub as-is.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="main-header">
+        <div class="main-title-block">
+          <div class="main-title">Ops dashboard template</div>
+          <div class="main-subtitle">
+            Static layout for GitHub — wiring and data can be added later.
+          </div>
+        </div>
+        <div class="main-controls">
+          <span class="tag accent">Template: v1.0</span>
+          <span class="tag">Mode: Read-only</span>
+          <button class="action-btn primary" type="button">
+            <span>Export layout</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="grid">
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title-block">
+              <div class="panel-title">Task viewer</div>
+              <div class="panel-subtitle">
+                High-level tasks for the active pipeline.
+              </div>
+            </div>
+            <div class="panel-tags">
+              <span class="tag accent">Pipeline: Active</span>
+              <span class="tag">Scope: Ops</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="list">
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Validate new client intake</div>
+                  <div class="list-meta">Status: In progress · Owner: Ops</div>
+                </div>
+                <span class="pill warning">In progress</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Sync GitHub template with live config</div>
+                  <div class="list-meta">Status: Pending · Owner: Systems</div>
+                </div>
+                <span class="pill">Pending</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Review staged “easy” pipeline</div>
+                  <div class="list-meta">Status: Ready · Owner: Ops</div>
+                </div>
+                <span class="pill success">Ready</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title-block">
+              <div class="panel-title">Support console</div>
+              <div class="panel-subtitle">
+                Notes, flags, and quick context for this template.
+              </div>
+            </div>
+            <div class="panel-tags">
+              <span class="tag">Channel: Internal</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="list">
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Template is static-only</div>
+                  <div class="list-meta">
+                    No backend, no JS wiring yet — safe to paste into GitHub.
+                  </div>
+                </div>
+                <span class="pill success">Safe</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Closing tags verified</div>
+                  <div class="list-meta">
+                    File ends with &lt;/body&gt; and &lt;/html&gt; — complete document.
+                  </div>
+                </div>
+                <span class="pill success">Complete</span>
+              </div>
+              <div class="list-item">
+                <div class="list-label">
+                  <div class="list-title">Future wiring</div>
+                  <div class="list-meta">
+                    Buttons can be wired later without changing layout.
+                  </div>
+                </div>
+                <span class="pill">Later</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div class="panel-title-block">
+            <div class="panel-title">Steps manager</div>
+            <div class="panel-subtitle">
+              Visual separation between active, staged-easy, and staged-hard pipelines.
+            </div>
+          </div>
+          <div class="panel-tags">
+            <span class="tag accent">Multi-pipeline view</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="steps-grid">
+            <div>
+              <div class="steps-column-title">Active pipeline</div>
+              <div class="steps-list">
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Step 1 · Intake</div>
+                    <div class="step-meta">Collect baseline info and constraints.</div>
+                  </div>
+                  <span class="pill success">Live</span>
+                </div>
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Step 2 · Template sync</div>
+                    <div class="step-meta">Align GitHub layout with ops reality.</div>
+                  </div>
+                  <span class="pill warning">In progress</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="steps-column-title">Staged pipelines</div>
+              <div class="steps-list">
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Easy pipeline</div>
+                    <div class="step-meta">Low-friction onboarding path.</div>
+                  </div>
+                  <span class="pill">Staged</span>
+                </div>
+                <div class="step-item">
+                  <div class="step-label">
+                    <div class="step-title">Hard pipeline</div>
+                    <div class="step-meta">Complex integrations and edge cases.</div>
+                  </div>
+                  <span class="pill danger">Heavy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div class="panel-title-block">
+            <div class="panel-title">System logs</div>
+            <div class="panel-subtitle">
+              Read-only log stream for template-related events.
+            </div>
+          </div>
+          <div class="panel-tags">
+            <span class="tag">Mode: Read-only</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="logs-list">
+            <div class="log-item">
+              <div class="log-text">
+                [INFO] Template v1.0 exported for GitHub use.
+              </div>
+              <span class="log-tag info">Info</span>
+            </div>
+            <div class="log-item">
+              <div class="log-text">
+                [EVENT] Layout verified: all closing tags present.
+              </div>
+              <span class="log-tag event">Event</span>
+            </div>
+            <div class="log-item">
+              <div class="log-text">
+                [INFO] Static-only mode confirmed — no runtime dependencies.
+              </div>
+              <span class="log-tag info">Info</span>
+            </div>
+            <div class="log-item">
+              <div class="log-text">
+                [ERROR] None detected in current template snapshot.
+              </div>
+              <span class="log-tag error">Error</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+  </html>    .sidebar a:hover {
       color: #FF6A00;
     }
 
