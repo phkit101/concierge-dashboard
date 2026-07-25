@@ -535,7 +535,7 @@
           </span>
         </div>
         <div class="hint">
-          One copy, one paste.  
+          One copy, one paste.
           This file is designed to drop straight into GitHub as-is.
         </div>
       </div>
@@ -590,7 +590,7 @@
               </div>
               <div class="list-item">
                 <div class="list-label">
-                  <div class="list-title">Review staged “easy” pipeline</div>
+                  <div class="list-title">Review staged "easy" pipeline</div>
                   <div class="list-meta">Status: Ready · Owner: Ops</div>
                 </div>
                 <span class="pill success">Ready</span>
@@ -744,39 +744,5 @@
       </section>
     </main>
   </div>
-  <script>
-  // Map each sidebar item to its panel
-  const panels = {
-    "Active Ops Dashboard": null,            // No panel for this one yet
-    "Staged Pipelines": "panel-staged",
-    "System Logs": "panel-logs"
-  };
-
-  // Get all nav items
-  const navItems = document.querySelectorAll('.nav-item');
-
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      // Remove highlight from all
-      navItems.forEach(i => i.classList.remove('primary'));
-
-      // Highlight clicked item
-      item.classList.add('primary');
-
-      // Get label text
-      const label = item.querySelector('span').innerText;
-
-      // Hide all panels
-      document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
-
-      // Show the correct panel if mapped
-      const panelId = panels[label];
-      if (panelId) {
-        document.getElementById(panelId).style.display = 'block';
-      }
-    });
-  });
-</script>
 </body>
-  </html>    
-
+</html>
